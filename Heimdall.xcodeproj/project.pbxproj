@@ -6,8 +6,42 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		3C0CF49B2E79D74700AFA5E8 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C0CF49A2E79D74700AFA5E8 /* WidgetKit.framework */; };
+		3C0CF49D2E79D74700AFA5E8 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C0CF49C2E79D74700AFA5E8 /* SwiftUI.framework */; };
+		3C0CF4AE2E79D74800AFA5E8 /* HeimdallWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 3C0CF4982E79D74700AFA5E8 /* HeimdallWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3C0CF4AC2E79D74800AFA5E8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3C0CF4712E79CA7500AFA5E8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3C0CF4972E79D74700AFA5E8;
+			remoteInfo = HeimdallWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		3C0CF4B32E79D74800AFA5E8 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				3C0CF4AE2E79D74800AFA5E8 /* HeimdallWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		3C0CF4792E79CA7600AFA5E8 /* Heimdall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Heimdall.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C0CF4982E79D74700AFA5E8 /* HeimdallWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = HeimdallWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C0CF49A2E79D74700AFA5E8 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		3C0CF49C2E79D74700AFA5E8 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		3C0CF4B42E79D75900AFA5E8 /* HeimdallWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HeimdallWidgetExtension.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -18,6 +52,20 @@
 			);
 			target = 3C0CF4782E79CA7600AFA5E8 /* Heimdall */;
 		};
+		3C0CF4B22E79D74800AFA5E8 /* Exceptions for "HeimdallWidget" folder in "HeimdallWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 3C0CF4972E79D74700AFA5E8 /* HeimdallWidgetExtension */;
+		};
+		3C0CF4B82E79D82C00AFA5E8 /* Exceptions for "Heimdall" folder in "HeimdallWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				SharedDataSource.swift,
+			);
+			target = 3C0CF4972E79D74700AFA5E8 /* HeimdallWidgetExtension */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -25,8 +73,17 @@
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				3C0CF48B2E79CA7600AFA5E8 /* Exceptions for "Heimdall" folder in "Heimdall" target */,
+				3C0CF4B82E79D82C00AFA5E8 /* Exceptions for "Heimdall" folder in "HeimdallWidgetExtension" target */,
 			);
 			path = Heimdall;
+			sourceTree = "<group>";
+		};
+		3C0CF49E2E79D74700AFA5E8 /* HeimdallWidget */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				3C0CF4B22E79D74800AFA5E8 /* Exceptions for "HeimdallWidget" folder in "HeimdallWidgetExtension" target */,
+			);
+			path = HeimdallWidget;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -39,13 +96,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3C0CF4952E79D74700AFA5E8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3C0CF49D2E79D74700AFA5E8 /* SwiftUI.framework in Frameworks */,
+				3C0CF49B2E79D74700AFA5E8 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		3C0CF4702E79CA7500AFA5E8 = {
 			isa = PBXGroup;
 			children = (
+				3C0CF4B42E79D75900AFA5E8 /* HeimdallWidgetExtension.entitlements */,
 				3C0CF47B2E79CA7600AFA5E8 /* Heimdall */,
+				3C0CF49E2E79D74700AFA5E8 /* HeimdallWidget */,
+				3C0CF4992E79D74700AFA5E8 /* Frameworks */,
 				3C0CF47A2E79CA7600AFA5E8 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -54,8 +123,18 @@
 			isa = PBXGroup;
 			children = (
 				3C0CF4792E79CA7600AFA5E8 /* Heimdall.app */,
+				3C0CF4982E79D74700AFA5E8 /* HeimdallWidgetExtension.appex */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		3C0CF4992E79D74700AFA5E8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3C0CF49A2E79D74700AFA5E8 /* WidgetKit.framework */,
+				3C0CF49C2E79D74700AFA5E8 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -68,10 +147,12 @@
 				3C0CF4752E79CA7600AFA5E8 /* Sources */,
 				3C0CF4762E79CA7600AFA5E8 /* Frameworks */,
 				3C0CF4772E79CA7600AFA5E8 /* Resources */,
+				3C0CF4B32E79D74800AFA5E8 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				3C0CF4AD2E79D74800AFA5E8 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				3C0CF47B2E79CA7600AFA5E8 /* Heimdall */,
@@ -82,6 +163,28 @@
 			productName = Heimdall;
 			productReference = 3C0CF4792E79CA7600AFA5E8 /* Heimdall.app */;
 			productType = "com.apple.product-type.application";
+		};
+		3C0CF4972E79D74700AFA5E8 /* HeimdallWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3C0CF4AF2E79D74800AFA5E8 /* Build configuration list for PBXNativeTarget "HeimdallWidgetExtension" */;
+			buildPhases = (
+				3C0CF4942E79D74700AFA5E8 /* Sources */,
+				3C0CF4952E79D74700AFA5E8 /* Frameworks */,
+				3C0CF4962E79D74700AFA5E8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				3C0CF49E2E79D74700AFA5E8 /* HeimdallWidget */,
+			);
+			name = HeimdallWidgetExtension;
+			packageProductDependencies = (
+			);
+			productName = HeimdallWidgetExtension;
+			productReference = 3C0CF4982E79D74700AFA5E8 /* HeimdallWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -94,6 +197,9 @@
 				LastUpgradeCheck = 2600;
 				TargetAttributes = {
 					3C0CF4782E79CA7600AFA5E8 = {
+						CreatedOnToolsVersion = 26.0;
+					};
+					3C0CF4972E79D74700AFA5E8 = {
 						CreatedOnToolsVersion = 26.0;
 					};
 				};
@@ -113,12 +219,20 @@
 			projectRoot = "";
 			targets = (
 				3C0CF4782E79CA7600AFA5E8 /* Heimdall */,
+				3C0CF4972E79D74700AFA5E8 /* HeimdallWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		3C0CF4772E79CA7600AFA5E8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3C0CF4962E79D74700AFA5E8 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -135,7 +249,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3C0CF4942E79D74700AFA5E8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		3C0CF4AD2E79D74800AFA5E8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3C0CF4972E79D74700AFA5E8 /* HeimdallWidgetExtension */;
+			targetProxy = 3C0CF4AC2E79D74800AFA5E8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		3C0CF48D2E79CA7600AFA5E8 /* Debug */ = {
@@ -143,23 +272,27 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Heimdall/Heimdall.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = L2DN5R7X75;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Heimdall/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.personal.Heimdall.Heimdall;
+				PRODUCT_BUNDLE_IDENTIFIER = com.personal.heimdall;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
@@ -175,23 +308,27 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Heimdall/Heimdall.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = L2DN5R7X75;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Heimdall/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.personal.Heimdall.Heimdall;
+				PRODUCT_BUNDLE_IDENTIFIER = com.personal.heimdall;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
@@ -323,6 +460,72 @@
 			};
 			name = Release;
 		};
+		3C0CF4B02E79D74800AFA5E8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = HeimdallWidgetExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = HeimdallWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = HeimdallWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.personal.heimdall.HeimdallWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3C0CF4B12E79D74800AFA5E8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = HeimdallWidgetExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = HeimdallWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = HeimdallWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.personal.heimdall.HeimdallWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -340,6 +543,15 @@
 			buildConfigurations = (
 				3C0CF48D2E79CA7600AFA5E8 /* Debug */,
 				3C0CF48E2E79CA7600AFA5E8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3C0CF4AF2E79D74800AFA5E8 /* Build configuration list for PBXNativeTarget "HeimdallWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3C0CF4B02E79D74800AFA5E8 /* Debug */,
+				3C0CF4B12E79D74800AFA5E8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -1,0 +1,46 @@
+# Xcode
+.DS_Store
+xcuserdata/
+*.xcuserstate
+*.xcscmblueprint
+*.xccheckout
+
+# Derived data & build
+DerivedData/
+build/
+
+# Swift Package Manager
+.swiftpm/
+.build/
+Package.resolved
+
+# CocoaPods
+Pods/
+Podfile.lock
+
+# Carthage
+Carthage/Build/
+Carthage/Checkouts/
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output/
+
+# Other
+*.moved-aside
+*.xcuserdatad
+*.swp
+*.swo
+
+# Playgrounds
+timeline.xctimeline
+playground.xcworkspace
+
+# Firebase / Secrets
+GoogleService-Info.plist
+*.env
+*.key
+*.mobileprovision
+*.p12
