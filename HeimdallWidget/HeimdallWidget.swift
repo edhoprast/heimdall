@@ -46,6 +46,7 @@ struct HeimdallWidgetEntryView: View {
     }
 }
 
+@main
 struct HeimdallWidget: Widget {
     let kind: String = "WidgetDemoWidget"
 
