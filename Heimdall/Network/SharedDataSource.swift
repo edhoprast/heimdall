@@ -7,9 +7,6 @@
 
 import Foundation
 
-public struct MovieResponse: Equatable {
-    
-}
 public struct SharedDataStore {
     public enum ErrorTypes: Error {
         case message(String)
@@ -17,10 +14,22 @@ public struct SharedDataStore {
     }
     
     private static let tokenKey = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0OWFjZDRmMjNhN2UyNWIzMGM2OTk3ZmY4Y2UxNDg2MSIsIm5iZiI6MTQ1Mzg4MjY2OS43ODIsInN1YiI6IjU2YTg3ZDJkYzNhMzY4MjhjODAwMzZjNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.z-qmGtNf1gIhx6NFbTK6GKh9BbdM9mE1f_xQroVTjeo"
-    private static let baseUrl = "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_release_type=2|3&release_date.gte={min_date}&release_date.lte={max_date}"
-    
-    public static func fetchData(completion: @escaping (Result<String, ErrorTypes>) -> Void) {
-        guard let url = URL(string: "\(self.baseUrl)/movie/upcoming?language=en-US&page=1&region=ID") else {
+    private static let baseUrl = "https://api.themoviedb.org/3"
+
+    public static func fetchData(completion: @escaping (Result<MovieResponse, ErrorTypes>) -> Void) {
+        let today = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        
+        guard let monthAfter = Calendar.current.date(byAdding: .month, value: 1, to: today) else {
+            completion(.failure(.message("Failed to get date month after")))
+            return
+        }
+        
+        let todayString = formatter.string(from: today)
+        let monthAfterString = formatter.string(from: monthAfter)
+        
+        guard let url = URL(string: "\(self.baseUrl)/discover/movie?region=ID&with_release_type=3&sort_by=release_date.asc&release_date.gte=\(todayString)&release_date.lte=\(monthAfterString)") else {
             /// Return fail here
             completion(.failure(.message("URL Not Found")))
             return
@@ -40,7 +49,8 @@ public struct SharedDataStore {
             
             if let data = data {
                 do {
-                    
+                    let decoded = try JSONDecoder().decode(MovieResponse.self, from: data)
+                    completion(.success(decoded))
                 } catch {
                     /// Return fail here
                     completion(.failure(.message(error.localizedDescription)))

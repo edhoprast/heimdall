@@ -19,16 +19,16 @@ struct Provider: TimelineProvider {
     }
 
     func getSnapshot(in context: Context, completion: @escaping (MessageEntry) -> Void) {
-        let entry = MessageEntry(date: Date(), message: SharedDataStore.loadMessage())
-        completion(entry)
+//        let entry = MessageEntry(date: Date(), message: SharedDataStore.loadMessage())
+//        completion(entry)
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<MessageEntry>) -> Void) {
-        let entry = MessageEntry(date: Date(), message: SharedDataStore.loadMessage())
-        // Ask system to refresh tomorrow (once a day)
-        let nextUpdate = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
-        let timeline = Timeline(entries: [entry], policy: .after(nextUpdate))
-        completion(timeline)
+//        let entry = MessageEntry(date: Date(), message: SharedDataStore.loadMessage())
+//        // Ask system to refresh tomorrow (once a day)
+//        let nextUpdate = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
+//        let timeline = Timeline(entries: [entry], policy: .after(nextUpdate))
+//        completion(timeline)
     }
 }
 
@@ -36,13 +36,19 @@ struct HeimdallWidgetEntryView: View {
     var entry: Provider.Entry
 
     var body: some View {
-        VStack(alignment: .leading) {
-            Text("Widget Demo")
-                .font(.headline)
-            Text(entry.message)
-                .font(.body)
+        HStack {
+//            VStack {
+                Text("27")
+                    .font(.title)
+                    .bold()
+                Text("days")
+                    .font(.title2)
+//            }
+//            Image(systemName: "square.fill")
+//                .resizable()
+//                .foregroundColor(.red)
+//                .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        .padding()
     }
 }
 
