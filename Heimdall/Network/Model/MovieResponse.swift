@@ -5,6 +5,8 @@
 //  Created by Edho Prasetyo on 17/09/25.
 //
 
+import WidgetKit
+
 public struct MovieResponse: Decodable, Equatable {
     public let totalPages: Int
     public let totalResults: Int
@@ -19,7 +21,7 @@ public struct MovieResponse: Decodable, Equatable {
     }
 }
 
-public struct Movies: Decodable, Equatable {
+public struct Movies: Decodable, Equatable, TimelineEntry {
     public let adult: Bool
     public let backdropPath: String?
     public let genreIds: [Int]
@@ -34,6 +36,9 @@ public struct Movies: Decodable, Equatable {
     public let title: String
     public let video: Bool
     
+    /// For WidgetKit
+    public var date: Date = Date()
+    
     public enum CodingKeys: String, CodingKey {
         case adult, id, popularity, overview, title, video
         case backdropPath = "backdrop_path"
@@ -42,5 +47,33 @@ public struct Movies: Decodable, Equatable {
         case originalTitle = "original_title"
         case posterPath = "poster_path"
         case releaseDate = "release_date"
+    }
+    
+    public init(
+        adult: Bool = false,
+        backdropPath: String? = nil,
+        genreIds: [Int] = [],
+        id: Int = 0,
+        originalLanguage: String = "",
+        originalTitle: String,
+        overview: String = "",
+        popularity: Double = 0.0,
+        posterPath: String = "",
+        releaseDate: String,
+        title: String = "",
+        video: Bool = false
+    ) {
+        self.adult = adult
+        self.backdropPath = backdropPath
+        self.genreIds = genreIds
+        self.id = id
+        self.originalLanguage = originalLanguage
+        self.originalTitle = originalTitle
+        self.overview = overview
+        self.popularity = popularity
+        self.posterPath = posterPath
+        self.releaseDate = releaseDate
+        self.title = title
+        self.video = video
     }
 }
