@@ -62,8 +62,11 @@
 		3C0CF4B82E79D82C00AFA5E8 /* Exceptions for "Heimdall" folder in "HeimdallWidgetExtension" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				"Date+Ext.swift",
+				Helper.swift,
 				Network/Model/MovieResponse.swift,
 				Network/SharedDataSource.swift,
+				"String+Ext.swift",
 			);
 			target = 3C0CF4972E79D74700AFA5E8 /* HeimdallWidgetExtension */;
 		};

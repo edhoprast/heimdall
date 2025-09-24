@@ -12,7 +12,7 @@ extension String {
         let formatter = DateFormatter()
         formatter.dateFormat = format
         formatter.locale = Locale(identifier: "en_US_POSIX")
-        formatter.timeZone = TimeZone(abbreviation: "GMT+7") // Indonesia WIB
+        formatter.timeZone = TimeZone(identifier: "Asia/Jakarta") // Indonesia WIB
         return formatter.date(from: self)
     }
 }

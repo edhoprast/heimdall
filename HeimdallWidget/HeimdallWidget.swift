@@ -42,7 +42,7 @@ struct Provider: TimelineProvider {
             let dataProcessed = await data.getTopNearestMovie()
             
             // Ask system to refresh tomorrow (once a day)
-            let timeline = Timeline(entries: [dataProcessed], policy: .after(nextUpdate))
+            let timeline = Timeline(entries: [dataProcessed!], policy: .after(nextUpdate))
             completion(timeline)
         }
     }
@@ -52,26 +52,28 @@ struct HeimdallWidgetEntryView: View {
     var entry: Provider.Entry
 
     var body: some View {
+        let firstMovie = entry.movies.first!
+        
         HStack() {
             VStack(spacing: -4) {
-                Text("27")
+                Text(firstMovie.dateTitle)
                     .font(.system(size: 28, design: .rounded))
                     .minimumScaleFactor(0.5)
                     .lineLimit(1)
-                Text("days")
+                Text(firstMovie.dateSubtitle)
                     .font(.caption)
                     .foregroundStyle(.secondary)
                 Spacer()
             }
             
-//            if let ui = entry.image?.cgImage {
-//                Image(decorative: ui, scale: 1.0)
-//                    .resizable()
-//                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-//                    .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-//            }else{
+            if let ui = firstMovie.backdropImage?.cgImage {
+                Image(decorative: ui, scale: 1.0)
+                    .resizable()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+            }else{
                 Rectangle().fill(.secondary)
-//            }
+            }
         }
         .padding(.vertical, 8)
         .padding(.leading, 16)

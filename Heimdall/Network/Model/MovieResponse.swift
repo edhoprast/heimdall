@@ -21,8 +21,8 @@ public struct MovieResponse: Decodable, Equatable {
         case movies = "results"
     }
     
-    public func getTopNearestMovie() async -> MovieWidgetEntry {
-        guard !movies.isEmpty else { return [] }
+    public func getTopNearestMovie() async -> MovieWidgetEntry? {
+        guard !movies.isEmpty else { return nil }
         
         let threeMovies = Array(movies.prefix(3))
         
@@ -33,12 +33,11 @@ public struct MovieResponse: Decodable, Equatable {
             
             let countdown = dateConverted.daysUntil()
             
-            let backdropImage = await fetchImage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTABbXr4i-QODqhy7tofHYmTYh05rYPktzacw&s")
+            let backdropImage = await fetchImage("https://image.tmdb.org/t/p/w780\(backdropPath)")
             
             let subtitle: String?
             let dateTitle: String
             let dateSubtitle: String
-            
             
             if countdown > 30 {
                 subtitle = nil
