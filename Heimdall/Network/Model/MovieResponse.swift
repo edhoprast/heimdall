@@ -39,7 +39,11 @@ public struct MovieResponse: Decodable, Equatable {
             let dateTitle: String
             let dateSubtitle: String
             
-            if countdown > 30 {
+            if countdown <= 0 {
+                subtitle = dateConverted.formatDate()
+                dateTitle = "Now"
+                dateSubtitle = "Playing"
+            }else if countdown > 30 {
                 subtitle = nil
                 dateTitle = dateConverted.formatDate(format: "dd")
                 dateSubtitle = dateConverted.formatDate(format: "MMM")

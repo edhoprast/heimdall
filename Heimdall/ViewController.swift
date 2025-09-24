@@ -31,15 +31,5 @@ class ViewController: UIViewController {
             label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
             label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50)
         ])
-
-//        Task {
-//            let result = await SharedDataStore.fetchData()
-//            switch result {
-//            case let .success(response):
-//                print("ANJING SUKSES>>>>", response)
-//            case let .failure(error):
-//                print("ANJING ERROR>>>", error.localizedDescription)
-//            }
-//        }
     }
 }

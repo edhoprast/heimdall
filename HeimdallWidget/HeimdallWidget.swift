@@ -37,12 +37,12 @@ struct Provider: TimelineProvider {
     func getTimeline(in context: Context, completion: @escaping (Timeline<MovieWidgetEntry>) -> Void) {
         Task {
             let response = await SharedDataStore.fetchData()
-            guard case let .success(data) = response, let nextUpdate = Calendar.current.date(byAdding: .day, value: 1, to: Date()) else { return }
-            
-            let dataProcessed = await data.getTopNearestMovie()
+            guard case let .success(data) = response, let nextUpdate = Calendar.current.date(byAdding: .day, value: 1, to: Date()), let dataProcessed = await data.getTopNearestMovie() else {
+                return
+            }
             
             // Ask system to refresh tomorrow (once a day)
-            let timeline = Timeline(entries: [dataProcessed!], policy: .after(nextUpdate))
+            let timeline = Timeline(entries: [dataProcessed], policy: .after(nextUpdate))
             completion(timeline)
         }
     }
