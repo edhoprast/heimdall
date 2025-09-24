@@ -25,7 +25,11 @@ public struct SharedDataStore {
             return .failure(.message("Failed to get date month after"))
         }
         
-        let todayString = formatter.string(from: today)
+        guard let todayMock = Calendar.current.date(byAdding: .day, value: 10, to: today) else {
+            return .failure(.message("Failed to get date month after"))
+        }
+        
+        let todayString = formatter.string(from: todayMock)
         let monthAfterString = formatter.string(from: monthAfter)
         
         guard let url = URL(string: "\(self.baseUrl)/discover/movie?region=ID&with_release_type=3&sort_by=release_date.asc&release_date.gte=\(todayString)&release_date.lte=\(monthAfterString)") else {

@@ -31,5 +31,16 @@ class ViewController: UIViewController {
             label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
             label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50)
         ])
+        
+        Task {
+            let response = await SharedDataStore.fetchData()
+            switch response {
+            case .success(let success):
+                let haha = await success.getTopNearestMovie()
+                print("ANJING")
+            case .failure(let failure):
+                break
+            }
+        }
     }
 }

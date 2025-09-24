@@ -8,14 +8,14 @@
 import Foundation
 
 extension Date {
-    public func daysUntil() -> Int {
+    public func daysUntil(from: Date = Date()) -> Int {
         let calendar = Calendar.current
         
         // Force calendar to use Indonesia timezone
         var indonesianCalendar = calendar
         indonesianCalendar.timeZone = TimeZone(identifier: "Asia/Jakarta")!
         
-        let today = indonesianCalendar.startOfDay(for: Date())
+        let today = indonesianCalendar.startOfDay(for: from)
         let target = indonesianCalendar.startOfDay(for: self)
         
         let components = indonesianCalendar.dateComponents([.day], from: today, to: target)

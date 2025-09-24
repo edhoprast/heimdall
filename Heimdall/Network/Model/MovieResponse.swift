@@ -24,25 +24,34 @@ public struct MovieResponse: Decodable, Equatable {
     public func getTopNearestMovie() async -> MovieWidgetEntry? {
         guard !movies.isEmpty else { return nil }
         
-        let threeMovies = Array(movies.prefix(3))
+        let threeMovies = Array(movies.filter { $0.backdropPath != nil && !$0.title.isEmpty }.prefix(3))
         
         var topMovies: [MovieWidget] = []
         
+        var shouldShowSingleMovie: Bool = true
+        var nearestMovieDate: Date?
+        
         for data in threeMovies {
-            guard !data.originalTitle.isEmpty, let dateConverted = data.releaseDate.stringToDate(), let backdropPath = data.backdropPath else { continue }
+            guard !data.title.isEmpty, let dateConverted = data.releaseDate.stringToDate(), let backdropPath = data.backdropPath, !data.posterPath.isEmpty else { continue }
+            
+            if let nearestMovieDate {
+                shouldShowSingleMovie = dateConverted.daysUntil(from: nearestMovieDate) > 30
+            }else{
+                nearestMovieDate = dateConverted
+            }
             
             let countdown = dateConverted.daysUntil()
             
-            let backdropImage = await fetchImage("https://image.tmdb.org/t/p/w780\(backdropPath)")
+            let (backdropImage, posterImage) = await (fetchImage("https://image.tmdb.org/t/p/w780\(backdropPath)"), fetchImage("https://image.tmdb.org/t/p/w780\(data.posterPath)"))
             
             let subtitle: String?
-            let dateTitle: String
-            let dateSubtitle: String
+            let dateTitle: String?
+            let dateSubtitle: String?
             
             if countdown <= 0 {
-                subtitle = dateConverted.formatDate()
-                dateTitle = "Now"
-                dateSubtitle = "Playing"
+                subtitle = "Now Playing"
+                dateTitle = nil
+                dateSubtitle = nil
             }else if countdown > 30 {
                 subtitle = nil
                 dateTitle = dateConverted.formatDate(format: "dd")
@@ -55,16 +64,20 @@ public struct MovieResponse: Decodable, Equatable {
             
             topMovies.append(
                 MovieWidget(
-                   title: data.originalTitle,
+                   title: data.title,
                    subtitle: subtitle,
                    dateTitle: dateTitle,
                    dateSubtitle: dateSubtitle,
-                   backdropImage: backdropImage
+                   backdropImage: backdropImage,
+                   posterImage: posterImage
                )
             )
         }
         
-        return MovieWidgetEntry(movies: topMovies)
+        return MovieWidgetEntry(
+            movies: topMovies,
+            shouldShowSingleMovie: shouldShowSingleMovie
+        )
     }
 }
 
@@ -127,12 +140,15 @@ public struct Movies: Decodable, Equatable {
 public struct MovieWidgetEntry: TimelineEntry {
     public var date: Date = Date()
     public let movies: [MovieWidget]
+    /// This will only be `true` if the `nearest` movie date and the `second nearest` movie date are not away by a `month`
+    public let shouldShowSingleMovie: Bool
 }
 
 public struct MovieWidget {
     public let title: String
     public let subtitle: String?
-    public let dateTitle: String
-    public let dateSubtitle: String
+    public let dateTitle: String?
+    public let dateSubtitle: String?
     public let backdropImage: UIImage?
+    public let posterImage: UIImage?
 }
