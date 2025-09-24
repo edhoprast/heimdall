@@ -9,41 +9,41 @@ import WidgetKit
 import SwiftUI
 
 struct Provider: TimelineProvider {
-    func placeholder(in context: Context) -> Movies {
-        return Movies(
-            originalTitle: "Upcoming Movies",
-            releaseDate: "2025-01-01"
-        )
+    func placeholder(in context: Context) -> MovieWidgetEntry {
+        return MovieWidgetEntry(movies: [
+            MovieWidget(
+                title: "Upcoming Movies",
+                subtitle: "21 Oct 2026",
+                dateTitle: "27",
+                dateSubtitle: "days",
+                backdropImage: nil
+            )
+        ])
     }
 
-    func getSnapshot(in context: Context, completion: @escaping (Movies) -> Void) {
-        Task{
-            let img = await fetchImage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTABbXr4i-QODqhy7tofHYmTYh05rYPktzacw&s")
-            let entry = MessageEntry(date: Date(), message: "Snapshot", image: img)
-            completion(entry)
-        }
+    func getSnapshot(in context: Context, completion: @escaping (MovieWidgetEntry) -> Void) {
+        let snapshot = MovieWidgetEntry(movies: [
+            MovieWidget(
+                title: "Upcoming Movies",
+                subtitle: "21 Oct 2026",
+                dateTitle: "27",
+                dateSubtitle: "days",
+                backdropImage: nil
+            )
+        ])
+        completion(snapshot)
     }
 
-    func getTimeline(in context: Context, completion: @escaping (Timeline<MessageEntry>) -> Void) {
+    func getTimeline(in context: Context, completion: @escaping (Timeline<MovieWidgetEntry>) -> Void) {
         Task {
-            let img = await fetchImage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTABbXr4i-QODqhy7tofHYmTYh05rYPktzacw&s")
-            let entry = MessageEntry(date: Date(), message: "Timeline", image: img)
+            let response = await SharedDataStore.fetchData()
+            guard case let .success(data) = response, let nextUpdate = Calendar.current.date(byAdding: .day, value: 1, to: Date()) else { return }
+            
+            let dataProcessed = await data.getTopNearestMovie()
+            
             // Ask system to refresh tomorrow (once a day)
-            let nextUpdate = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
-            let timeline = Timeline(entries: [entry], policy: .after(nextUpdate))
+            let timeline = Timeline(entries: [dataProcessed], policy: .after(nextUpdate))
             completion(timeline)
-        }
-    }
-    
-    // MARK: - Image fetcher
-    private func fetchImage(_ urlString: String) async -> UIImage? {
-        guard let url = URL(string: urlString) else { return nil }
-        do {
-            let (data, response) = try await URLSession.shared.data(from: url)
-            guard (response as? HTTPURLResponse)?.statusCode == 200 else { return nil }
-            return UIImage(data: data)
-        } catch {
-            return nil
         }
     }
 }
@@ -64,14 +64,14 @@ struct HeimdallWidgetEntryView: View {
                 Spacer()
             }
             
-            if let ui = entry.image?.cgImage {
-                Image(decorative: ui, scale: 1.0)
-                    .resizable()
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-            }else{
+//            if let ui = entry.image?.cgImage {
+//                Image(decorative: ui, scale: 1.0)
+//                    .resizable()
+//                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+//                    .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+//            }else{
                 Rectangle().fill(.secondary)
-            }
+//            }
         }
         .padding(.vertical, 8)
         .padding(.leading, 16)

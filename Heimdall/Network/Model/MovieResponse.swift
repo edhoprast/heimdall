@@ -6,6 +6,7 @@
 //
 
 import WidgetKit
+import UIKit
 
 public struct MovieResponse: Decodable, Equatable {
     public let totalPages: Int
@@ -19,9 +20,53 @@ public struct MovieResponse: Decodable, Equatable {
         case page
         case movies = "results"
     }
+    
+    public func getTopNearestMovie() async -> MovieWidgetEntry {
+        guard !movies.isEmpty else { return [] }
+        
+        let threeMovies = Array(movies.prefix(3))
+        
+        var topMovies: [MovieWidget] = []
+        
+        for data in threeMovies {
+            guard !data.originalTitle.isEmpty, let dateConverted = data.releaseDate.stringToDate(), let backdropPath = data.backdropPath else { continue }
+            
+            let countdown = dateConverted.daysUntil()
+            
+            let backdropImage = await fetchImage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTABbXr4i-QODqhy7tofHYmTYh05rYPktzacw&s")
+            
+            let subtitle: String?
+            let dateTitle: String
+            let dateSubtitle: String
+            
+            
+            if countdown > 30 {
+                subtitle = nil
+                dateTitle = dateConverted.formatDate(format: "dd")
+                dateSubtitle = dateConverted.formatDate(format: "MMM")
+            }else{
+                subtitle = dateConverted.formatDate()
+                dateTitle = String(countdown)
+                dateSubtitle = "days"
+            }
+            
+            topMovies.append(
+                MovieWidget(
+                   title: data.originalTitle,
+                   subtitle: subtitle,
+                   dateTitle: dateTitle,
+                   dateSubtitle: dateSubtitle,
+                   backdropImage: backdropImage
+               )
+            )
+        }
+        
+        return MovieWidgetEntry(movies: topMovies)
+    }
 }
 
-public struct Movies: Decodable, Equatable, TimelineEntry {
+
+public struct Movies: Decodable, Equatable {
     public let adult: Bool
     public let backdropPath: String?
     public let genreIds: [Int]
@@ -35,9 +80,6 @@ public struct Movies: Decodable, Equatable, TimelineEntry {
     /// Sometimes `title` is actually the converted original title to english/more general phrases
     public let title: String
     public let video: Bool
-    
-    /// For WidgetKit
-    public var date: Date = Date()
     
     public enum CodingKeys: String, CodingKey {
         case adult, id, popularity, overview, title, video
@@ -76,4 +118,18 @@ public struct Movies: Decodable, Equatable, TimelineEntry {
         self.title = title
         self.video = video
     }
+}
+
+/// For WidgetKit
+public struct MovieWidgetEntry: TimelineEntry {
+    public var date: Date = Date()
+    public let movies: [MovieWidget]
+}
+
+public struct MovieWidget {
+    public let title: String
+    public let subtitle: String?
+    public let dateTitle: String
+    public let dateSubtitle: String
+    public let backdropImage: UIImage?
 }
